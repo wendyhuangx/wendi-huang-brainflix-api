@@ -18,4 +18,15 @@ router.get("/", (req, res) => {
     }));
     res.json(videoSummaries);
 });
+
+router.get("/:id", (req,res) => {
+    const videos = readVideos();
+    const video = videos.find((video) => video.id === req.params.id);
+    if(video){
+        res.json(video);
+    }else{
+        res.status(404).json({error:"Video not found"});
+    }
+});
+
 module.exports=router;
