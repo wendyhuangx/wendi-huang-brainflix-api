@@ -29,4 +29,30 @@ router.get("/:id", (req,res) => {
     }
 });
 
+router.post("/", (req, res) =>{
+    const {title, description} = req.body;
+    if(!title||!description){
+        return res.status(400).json({error: "Title and description are required"});
+    }
+    const newVideo = {
+        id: uuidv4(),
+        title,
+        channel:"Uses for Peanut Butter",
+        image:"/images/default-thumbnail.png",
+        description,
+        views: "0",
+        likes: "0",
+        duration: "4:10",
+        video: "/stream",
+        timestamp: Date.now(),
+        comments:[],
+    };
+    const videos = readVideos();
+    videos.push(newVideo);
+
+    fs.writeFileSync(videoFilePath, JSON.stringify(videos, null,2));
+    res.status(201).json(newVideo);
+});
+
+
 module.exports=router;
