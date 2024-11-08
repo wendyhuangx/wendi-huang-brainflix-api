@@ -1,6 +1,6 @@
 const express = require('express');
 const fs = require('fs');
-const {v4, uuidv4} = require('uuid');
+const {v4: uuidv4} = require('uuid');
 const router = express.Router();
 
 const videoFilePath= './data/videos.json';
@@ -38,7 +38,7 @@ router.post("/", (req, res) =>{
         id: uuidv4(),
         title,
         channel:"Uses for Peanut Butter",
-        image:"/images/default-thumbnail.png",
+        image:"/images/default-thumbnail.jpg",
         description,
         views: "0",
         likes: "0",
